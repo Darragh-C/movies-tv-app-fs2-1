@@ -8,11 +8,19 @@ import Spinner from '../components/spinner'
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
+  console.log(`show id at tvDetailsPage: ${id}`);
 
   const { data: movie, error, isLoading, isError } = useQuery(
     ["movie", { id: id }],
     getMovie
   );
+
+  // console.log(`show object at tvDetailsPage: ${movie}`);
+ 
+  // console.log("show at tvDetailsPage:");
+  // Object.keys(movie).forEach(key => {
+  //   console.log(`${key}: ${show[key]}`);
+  // });
 
   if (isLoading) {
     return <Spinner />;

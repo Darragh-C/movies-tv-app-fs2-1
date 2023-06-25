@@ -62,6 +62,27 @@ export const getMovieImages = ({ queryKey }) => {
  });
 };
 
+export const getTvShowImages = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  ).then( (response) => {
+    if (!response.ok) {
+      console.log('fetch error for tv show images');
+      throw new Error(response.json().message);
+    }
+    
+    return response.json();
+
+  })
+  .catch((error) => {
+    console.log('catch error for tv show images');
+    throw error
+    
+ });
+};
+
 export const getMovieReviews = (id) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${import.meta.env.VITE_TMDB_KEY}`
@@ -99,5 +120,25 @@ export const getTvSeries = () => {
   .catch((error) => {
      throw error
   });
+};
+
+export const getShow = (args) => {
+  console.log("get show args:");
+  Object.keys(args).forEach(key => {
+    console.log(`${key}: ${args[key]}`);
+  });
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
 };
 

@@ -69,7 +69,9 @@ const MovieDetails = ( {movie}) => {
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
-        <Chip label={`Released: ${movie.release_date}`} />
+        {movie.release_date && (
+          <Chip label={`Released: ${movie.release_date}`} />
+        )}
       </Paper>
       <Fab    
         color="secondary"
