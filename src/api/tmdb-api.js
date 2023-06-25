@@ -72,9 +72,7 @@ export const getTvShowImages = ({ queryKey }) => {
       console.log('fetch error for tv show images');
       throw new Error(response.json().message);
     }
-    
     return response.json();
-
   })
   .catch((error) => {
     console.log('catch error for tv show images');
