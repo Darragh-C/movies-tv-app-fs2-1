@@ -140,3 +140,23 @@ export const getShow = (args) => {
  });
 };
 
+export const getTvSeason = (args) => {
+  console.log("get season args:");
+  Object.keys(args).forEach(key => {
+    console.log(`${key}: ${args[key]}`);
+  });
+  const [ , ids ] = args.queryKey;
+  const { seriesId, seasonNum } = ids;
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${seriesId}/season/$${seasonNum}?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
+ });
+};
+
