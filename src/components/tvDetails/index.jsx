@@ -104,7 +104,7 @@ const TvDetails = ( {show}) => {
         </Paper>
       )}
 
-      <SeasonList seasons={show.seasons}/>
+      <SeasonList seasons={show.seasons} show={show.id}/>
 
       <Fab    
         color="secondary"

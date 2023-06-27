@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import TvDetails from "../components/tvDetails";
+import SeasonDetails from "../components/seasonDetails";
 import PageTemplate from "../components/templateTvPage";
 import { getTvSeason } from '../api/tmdb-api'
 import { useQuery } from "react-query";
@@ -8,20 +8,20 @@ import Spinner from '../components/spinner'
 
 
 const SeasonDetailsPage = () => {
-  const { id } = useParams();
-  console.log(`show id at tvDetailsPage: ${id}`);
+  const { seriesId, seasonNum } = useParams();
+  console.log(`show id at tvDetailsPage: ${seriesId, seasonNum}`);
 
   const { data: season, error, isLoading, isError } = useQuery(
-    ["tvSeason", { seriesId: SeriesId, seasonNum: seasonNum }],
+    ["tvSeason", { seriesId: seriesId, seasonNum: seasonNum }],
     getTvSeason
   );
   
-  if (show) {
-    console.log(`show object at tvDetailsPage: ${show}`);
+  if (season) {
+    console.log(`show object at tvDetailsPage: ${season}`);
  
     console.log("show at tvDetailsPage:");
-    Object.keys(show).forEach(key => {
-      console.log(`${key}: ${show[key]}`);
+    Object.keys(season).forEach(key => {
+      console.log(`${key}: ${season[key]}`);
     });
   }
 
@@ -33,13 +33,13 @@ const SeasonDetailsPage = () => {
     return <h1>{error.message}</h1>;
   }
 
-  if (show) {
+  if (season) {
     return (
       <>
-        {show ? (
+        {season ? (
           <>
-            <PageTemplate show={show}>
-              <TvDetails show={show} />
+            <PageTemplate show={season}>
+              <SeasonDetails season={season} />
             </PageTemplate>
           </>
         ) : (
