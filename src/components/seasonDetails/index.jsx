@@ -12,6 +12,7 @@ import Drawer from "@mui/material/Drawer";
 //import showReviews from '../showReviews'
 import SeasonList from "../seasonList"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EpisodeList from "../episodeList";
 
 const styles = {
   chipSet: {
@@ -50,6 +51,8 @@ const SeasonDetails = ( {season}) => {
           <Chip icon={<CalendarMonthIcon />} label={`${season.air_date}`} />
         )}
       </Paper>
+      
+      <EpisodeList episodes={season.episodes}/>
     </>
   );
 };
