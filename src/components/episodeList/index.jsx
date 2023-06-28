@@ -6,6 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Chip from "@mui/material/Chip";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const styles = {
   chipSet: {
@@ -18,26 +21,39 @@ const styles = {
     margin: 0,
   },
   chipLabel: {
-    padding: 2.5,
+    float: 'right', 
+  },
+  episodeNum: {
+    margin: 2, 
   },
 };
 
 const EpisodeList = ( { episodes } ) => {
 
+  
+
   return (
     <>
       <List sx={{ width: '100%', bgcolor: 'background.paper',  }}>
         {episodes.map((e) => (
+         
           <>
             <ListItem alignItems="flex-start">
               <div>
                 <ListItemText
-                  sx={styles.chipLabel}
+                  sx={styles.episodeNum}
                   primary={e.episode_number}
                 />
               </div>
               <ListItemText
-                primary={e.name}
+                primary={
+                  <>
+                    {e.name} 
+                    <Chip sx={styles.chipLabel} label={e.vote_average} />
+                    <Chip sx={styles.chipLabel} icon={<CalendarMonthIcon />} label={e.air_date} />
+                    <Chip sx={styles.chipLabel} icon={<AccessTimeIcon />} label={`${e.runtime} min`} />
+                  </>
+                }
                 secondary={e.overview}
               />
             </ListItem>
