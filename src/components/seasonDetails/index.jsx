@@ -34,12 +34,12 @@ const styles = {
   },
 };
 
-const SeasonDetails = ( {season}) => {
+const SeasonDetails = ( { season, show }) => {
   const [drawerOpen, setDrawerOpen] = useState(false); 
   return (
     <>
       <Typography variant="h5" component="h3">
-        Overview
+        {show.name}
       </Typography>
 
       <Typography variant="h6" component="p">
@@ -51,7 +51,7 @@ const SeasonDetails = ( {season}) => {
           <Chip icon={<CalendarMonthIcon />} label={`${season.air_date}`} />
         )}
       </Paper>
-      
+
       <EpisodeList episodes={season.episodes}/>
     </>
   );

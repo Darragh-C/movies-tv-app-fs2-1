@@ -19,30 +19,32 @@ const styles = {
   },
 };
 
-const TemplateTvPage = ({ show, children }) => {
-  
+const TemplateTvPage = ({ show, season, children }) => {
+  let showImages;
+  let seasonImage;
 
+  if (show) {
     console.log(`show at TemplateTvPage: ${show}`);
     const { data , error, isLoading, isError } = useQuery(
       ["tvImages", { id: show.id }],
       getTvShowImages
     );
     console.log(`getTvShowImages data in TemplateTvPage: ${data}`);
+   
+    if (isLoading) {
+      console.log("loading");
+      return <Spinner />;
+    }
   
- 
- 
-  if (isLoading) {
-    console.log("loading");
-    return <Spinner />;
+    if (isError) {
+      console.log("error");
+      return <h1>{error.message}</h1>;
+    }
+    
+    showImages = data.posters 
+  } else if (season) {
+    seasonImage = season.poster_path;
   }
-
-  if (isError) {
-    console.log("error");
-    return <h1>{error.message}</h1>;
-  }
-  
-  const images = data.posters 
-
   return (
     <>
       <MovieHeader movie={show} />
@@ -50,20 +52,33 @@ const TemplateTvPage = ({ show, children }) => {
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div sx={styles.gridListRoot}>
-            <ImageList cols={1}>
-              {images.map((image) => (
+          <ImageList cols={1}>
+            {seasonImage ? (
+              <ImageListItem
+                key={seasonImage.file_path}
+                sx={styles.gridListTile}
+                cols={1}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${seasonImage.file_path}`}
+                  alt={seasonImage.poster_path}
+                />
+              </ImageListItem>
+            ) : (
+              showImages.map((showImage) => (
                 <ImageListItem
-                  key={image.file_path}
+                  key={showImage.file_path}
                   sx={styles.gridListTile}
                   cols={1}
                 >
                   <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.poster_path}
+                    src={`https://image.tmdb.org/t/p/w500/${showImage.file_path}`}
+                    alt={showImage.poster_path}
                   />
                 </ImageListItem>
-              ))}
-            </ImageList>
+              ))
+            )}
+          </ImageList>
           </div>
         </Grid>
 
@@ -73,6 +88,8 @@ const TemplateTvPage = ({ show, children }) => {
       </Grid>
     </>
   );
+
+  
 };
 
 export default TemplateTvPage;

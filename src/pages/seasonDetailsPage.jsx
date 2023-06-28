@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import SeasonDetails from "../components/seasonDetails";
 import PageTemplate from "../components/templateTvPage";
-import { getTvSeason } from '../api/tmdb-api'
+import { getTvSeason, getShow } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 
@@ -14,6 +14,12 @@ const SeasonDetailsPage = () => {
   const { data: season, error, isLoading, isError } = useQuery(
     ["tvSeason", { seriesId: seriesId, seasonNum: seasonNum }],
     getTvSeason
+  );
+
+  //get show from cache
+  const { data: show, showError, showIsLoading, showIsError } = useQuery(
+    ["show", { id: seriesId }],
+    getShow
   );
   
   if (season) {
@@ -38,8 +44,8 @@ const SeasonDetailsPage = () => {
       <>
         {season ? (
           <>
-            <PageTemplate show={season}>
-              <SeasonDetails season={season} />
+            <PageTemplate season={season} show={show} >
+              <SeasonDetails season={season} show={show} />
             </PageTemplate>
           </>
         ) : (

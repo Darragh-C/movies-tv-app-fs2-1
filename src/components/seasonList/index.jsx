@@ -36,7 +36,7 @@ const SeasonList = ( { show, seasons } ) => {
               <Chip label={s.episode_count + " episodes"} />
             </li>
             <li key={s.name + "link"}>
-              <Link to={`/tvshows/${show}/season/${s.id}`}>
+              <Link to={`/tvshows/${show}/season/${parseInt(s.name.replace(/\D/g, ''))}`}> 
                 <Button variant="outlined" size="medium" color="primary">
                   More Info ...
                 </Button>
