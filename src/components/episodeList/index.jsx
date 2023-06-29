@@ -35,9 +35,8 @@ const EpisodeList = ( { episodes } ) => {
   return (
     <>
       <List sx={{ width: '100%', bgcolor: 'background.paper',  }}>
-        {episodes.map((e) => (
-         
-          <>
+        {episodes.map((e, index) => (
+          <React.Fragment key={index}>
             <ListItem alignItems="flex-start">
               <div>
                 <ListItemText
@@ -58,7 +57,7 @@ const EpisodeList = ( { episodes } ) => {
               />
             </ListItem>
             <Divider variant="inset" component="li" />
-        </>
+          </React.Fragment>
         ))}
       </List>
     </>

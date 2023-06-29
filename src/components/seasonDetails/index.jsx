@@ -32,25 +32,22 @@ const styles = {
     top: 50,
     right: 2,
   },
+  text: {
+    alignItems: "center",
+  }
 };
 
 const SeasonDetails = ( { season, show }) => {
   const [drawerOpen, setDrawerOpen] = useState(false); 
   return (
     <>
-      <Typography variant="h5" component="h3">
+      <Typography sx={styles.text} variant="h5" component="h3">
         {show.name}
       </Typography>
 
-      <Typography variant="h6" component="p">
+      <Typography sx={styles.text} variant="h6" component="p">
         {season.name}
       </Typography>
-
-      <Paper component="ul" sx={styles.chipSet}>
-        {season.air_date && (
-          <Chip icon={<CalendarMonthIcon />} label={`${season.air_date}`} />
-        )}
-      </Paper>
 
       <EpisodeList episodes={season.episodes}/>
     </>

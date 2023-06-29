@@ -24,7 +24,7 @@ const SeasonList = ( { show, seasons } ) => {
       <h2>Seasons</h2>
     
       {seasons.map((s) => (
-        <Paper component="ul" sx={styles.chipSet}>
+        <Paper key={s.name + "paper"} component="ul" sx={styles.chipSet}>
           <li key={s.name}>
             <Chip label={s.name} sx={styles.chipLabel} color="primary" />
           </li>
@@ -35,7 +35,7 @@ const SeasonList = ( { show, seasons } ) => {
             <Chip label={s.episode_count + " episodes"} />
           </li>
           <li key={s.name + " link"}>
-            <Link to={`/tvshows/${show}/season/${parseInt(s.name.replace(/\D/g, ''))}`}> 
+            <Link to={`/tvshows/${show}/season/1`}> 
               <Button variant="outlined" size="medium" color="primary">
                 More Info ...
               </Button>

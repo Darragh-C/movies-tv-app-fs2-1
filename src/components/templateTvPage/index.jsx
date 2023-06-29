@@ -1,5 +1,5 @@
 import React from "react";
-import MovieHeader from "../MovieHeader";
+import TvHeader from "../TvHeader";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -23,7 +23,7 @@ const TemplateTvPage = ({ show, season, children }) => {
   let showImages;
   let seasonImage;
 
-  if (show) {
+  if (!season) {
     console.log(`show at TemplateTvPage: ${show}`);
     const { data , error, isLoading, isError } = useQuery(
       ["tvImages", { id: show.id }],
@@ -47,7 +47,7 @@ const TemplateTvPage = ({ show, season, children }) => {
   }
   return (
     <>
-      <MovieHeader movie={show} />
+      <TvHeader show={show} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
@@ -60,7 +60,7 @@ const TemplateTvPage = ({ show, season, children }) => {
                 cols={1}
               >
                 <img
-                  src={`https://image.tmdb.org/t/p/w500/${seasonImage.file_path}`}
+                  src={`https://image.tmdb.org/t/p/w500/${seasonImage}`}
                   alt={seasonImage.poster_path}
                 />
               </ImageListItem>
