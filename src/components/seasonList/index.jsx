@@ -22,28 +22,27 @@ const SeasonList = ( { show, seasons } ) => {
   return (
     <>
       <h2>Seasons</h2>
-      
-
-        {seasons.map((s) => (
-          <Paper component="ul" sx={styles.chipSet}>
-            <li key={s.name}>
-              <Chip label={s.name} sx={styles.chipLabel} color="primary" />
-            </li>
-            <li key={s.name+s.air_date}>
-              <Chip label={s.air_date} />
-            </li>
-            <li key={s.name + "episodes"}>
-              <Chip label={s.episode_count + " episodes"} />
-            </li>
-            <li key={s.name + "link"}>
-              <Link to={`/tvshows/${show}/season/${parseInt(s.name.replace(/\D/g, ''))}`}> 
-                <Button variant="outlined" size="medium" color="primary">
-                  More Info ...
-                </Button>
-              </Link>
-            </li>
-          </Paper>  
-        ))}
+    
+      {seasons.map((s) => (
+        <Paper component="ul" sx={styles.chipSet}>
+          <li key={s.name}>
+            <Chip label={s.name} sx={styles.chipLabel} color="primary" />
+          </li>
+          <li key={s.name+s.air_date}>
+            <Chip label={s.air_date} />
+          </li>
+          <li key={s.name + " episodes"}>
+            <Chip label={s.episode_count + " episodes"} />
+          </li>
+          <li key={s.name + " link"}>
+            <Link to={`/tvshows/${show}/season/${parseInt(s.name.replace(/\D/g, ''))}`}> 
+              <Button variant="outlined" size="medium" color="primary">
+                More Info ...
+              </Button>
+            </Link>
+          </li>
+        </Paper>  
+      ))}
       
     </>
 

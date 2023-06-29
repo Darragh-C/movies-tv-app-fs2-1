@@ -148,7 +148,7 @@ export const getTvSeason = (args) => {
   const [ , ids ] = args.queryKey;
   const { seriesId, seasonNum } = ids;
   return fetch(
-    `https://api.themoviedb.org/3/tv/${seriesId}/season/$${seasonNum}?api_key=${import.meta.env.VITE_TMDB_KEY}`
+    `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNum}?api_key=${import.meta.env.VITE_TMDB_KEY}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
