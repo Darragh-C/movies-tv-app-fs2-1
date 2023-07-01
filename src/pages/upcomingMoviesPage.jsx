@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PageTemplate from '../components/templateMovieListPage';
+import CardListPage from '../components/cardListPage';
 import { getUpcomingMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
@@ -24,7 +24,7 @@ const UpcomingMoviesPage = (props) => {
   // const addToFavourites = (movieId) => true;
 
   return (
-    <PageTemplate
+    <CardListPage
       title="Upcoming Movies"
       movies={movies}
       action={(movie) => {

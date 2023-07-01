@@ -27,7 +27,7 @@ const styles = {
   },
 };
 
-export default function FilterMoviesCard(props) {
+export default function CardListFilter(props) {
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
   if (isLoading) {

@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import React, { useState, useEffect, useContext, setState } from "react";
+import CardListPage from "../components/cardListPage";
 import { getTvSeries } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import { MoviesContext } from "../contexts/moviesContext";
 
 const TvSeriesPage = (props) => {
+  const context = setState(MoviesContext);
+  context.setBasePath("tv");
+
   const { data, error, isLoading, isError } = useQuery("tvseries", getTvSeries);
 
   if (isLoading) {
@@ -23,7 +27,7 @@ const TvSeriesPage = (props) => {
   // const addToFavourites = (movieId) => true;
 
   return (
-    <PageTemplate
+    <CardListPage
       title="Discover TV Series"
       movies={tvShows}
       action={(tvShow) => {

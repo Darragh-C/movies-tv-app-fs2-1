@@ -28,9 +28,9 @@ const SiteHeader = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const menuOptions = [
-    { label: "Home", path: "/" },
+    { label: "Movies", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
-    { label: "Upcoming", path: "/movies/upcoming" },
+    { label: "Upcoming movies", path: "/movies/upcoming" },
     { label: "TV", path: "/tvshows" },
   ];
 

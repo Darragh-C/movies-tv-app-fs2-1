@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Header from "../headerMovieList";
-import FilterCard from "../filterMoviesCard";
+import CardListHeader from "../cardListHeader";
+import CardListFilter from "../cardListFilter";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import MovieList from "../movieList";
+import CardList from "../cardList";
 
 const styles = {
   root: {
@@ -18,7 +18,7 @@ const styles = {
   },
 };
 
-function MovieListPageTemplate({ movies, title, action }) {
+function CardListPage({ movies, title, action }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -43,12 +43,13 @@ function MovieListPageTemplate({ movies, title, action }) {
    <>
       <Grid container sx={styles.root}>
         <Grid item xs={12}>
-          <Header title={title} />
+          <CardListHeader title={title} />
         </Grid>
         <Grid item container spacing={5}>
-          <MovieList
-            movies={displayedMovies}
+          <CardList
+            items={displayedMovies}
             action={action}
+            basePath={"movies"}
           />
         </Grid>
       </Grid>
@@ -65,7 +66,7 @@ function MovieListPageTemplate({ movies, title, action }) {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <FilterCard
+        <CardListFilter
           onUserInput={handleChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
@@ -74,4 +75,4 @@ function MovieListPageTemplate({ movies, title, action }) {
     </>  
   );
 }
-export default MovieListPageTemplate;
+export default CardListPage;

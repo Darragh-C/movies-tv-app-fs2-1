@@ -6,6 +6,7 @@ const MoviesContextProvider = (props) => {
   const [favourites, setFavourites] = useState([]);
   const [myReviews, setMyReviews] = useState( {} ); 
   const [mustWatch, setMustWatch] = useState([]);
+  const [linkBasePath, setLinkBasePath] = useState("");
 
   const addToFavourites = (movie) => {
     let updatedFavourites = [...favourites];
@@ -33,6 +34,10 @@ const MoviesContextProvider = (props) => {
     console.log(`Must Watch: ${updatedMustWatch}`);
   };  
 
+  const setBasePath = (basePath) => {
+    setLinkBasePath(basePath);
+  }
+
   return (
     <MoviesContext.Provider
       value={{
@@ -40,6 +45,8 @@ const MoviesContextProvider = (props) => {
         addToFavourites,
         removeFromFavourites,
         addToMustWatch,
+        linkBasePath,
+        setBasePath,
       }}
     >
       {props.children}

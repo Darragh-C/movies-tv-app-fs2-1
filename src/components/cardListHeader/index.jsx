@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const Header = (props ) => {
+const CardListHeader = (props ) => {
   const title = props.title
 
   return (
@@ -38,4 +38,4 @@ const Header = (props ) => {
   );
 };
 
-export default Header;
+export default CardListHeader;

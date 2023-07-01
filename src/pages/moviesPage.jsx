@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import React, { useState, useEffect, setState } from "react";
+import CardListPage from "../components/cardListPage";
 import { getMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import { MoviesContext } from "../contexts/moviesContext";
 
-const HomePage = (props) => {
+const MoviesPage = (props) => {
+  const context = setState(MoviesContext);
+  context.setBasePath("movies");
+
   const { data, error, isLoading, isError } = useQuery("discover", getMovies);
 
   if (isLoading) {
@@ -23,7 +27,7 @@ const HomePage = (props) => {
   // const addToFavourites = (movieId) => true;
 
   return (
-    <PageTemplate
+    <CardListPage
       title="Discover Movies"
       movies={movies}
       action={(movie) => {
@@ -32,4 +36,4 @@ const HomePage = (props) => {
     />
   );
 };
-export default HomePage;
+export default MoviesPage;

@@ -24,16 +24,16 @@ const styles = {
   },
 };
 
-export default function MovieCard({ movie, action }) {      // Destructure props
+export default function TvCard({ show, action }) {      // Destructure props
   const { favourites, addToFavourites } = useContext(MoviesContext);
 
-  if (favourites.find((id) => id === movie.id)) {
-    movie.favourite = true;
+  if (favourites.find((id) => id === show.id)) {
+    show.favourite = true;
   } else {
-    movie.favourite = false
+    show.favourite = false
   }
 
   return (
-    <ProdCard prod={movie} action={action} basePath={"movies"}/>
+    <ProdCard prod={show} action={action} basePath={"tvshows"}/>
   );
 }
