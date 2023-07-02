@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import CardListHeader from "../cardListHeader";
+import MediaHeader from "../mediaHeader";
 import CardListFilter from "../cardListFilter";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import CardList from "../cardList";
+import CardListHeaderInsert from "../headerInserts/cardListHeaderInsert";
 
 const styles = {
   root: {
@@ -43,13 +44,14 @@ function CardListPage({ movies, title, action }) {
    <>
       <Grid container sx={styles.root}>
         <Grid item xs={12}>
-          <CardListHeader title={title} />
+          <MediaHeader>
+            <CardListHeaderInsert title={title}/>
+          </MediaHeader>
         </Grid>
         <Grid item container spacing={5}>
           <CardList
             items={displayedMovies}
             action={action}
-            basePath={"movies"}
           />
         </Grid>
       </Grid>

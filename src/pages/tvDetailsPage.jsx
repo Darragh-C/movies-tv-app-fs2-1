@@ -1,56 +1,55 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import TvDetails from "../components/tvDetails";
-import PageTemplate from "../components/templateTvPage";
-import { getShow } from '../api/tmdb-api'
+import { getShow, getTvShowImages } from '../api/tmdb-api'
 import { useQuery } from "react-query";
-import Spinner from '../components/spinner'
-
+import Spinner from '../components/spinner';
+import TemplateMediaDetailsPage from "../components/templateMediaDetailsPage";
+import MediaImageList from "../components/imageLists/mediaImageList";
+import MediaHeader from "../components/MediaHeader";
+import MediaHeaderInsert from "../components/headerInserts/MediaHeaderInsert";
 
 const TvDetailsPage = () => {
   const { id } = useParams();
-  console.log(`show id at tvDetailsPage: ${id}`);
 
-  const { data: show, error, isLoading, isError } = useQuery(
+  const { data: show, error: showError, isLoading: showIsLoading, isError: showIsError } = useQuery(
     ["show", { id: id }],
     getShow
   );
-  
-  if (show) {
-    console.log(`show object at tvDetailsPage: ${show}`);
- 
-    console.log("show at tvDetailsPage:");
-    Object.keys(show).forEach(key => {
-      console.log(`${key}: ${show[key]}`);
-    });
+
+  const {data: images, error: imagesError, isLoading: imagesIsLoading, isError: imagesIsError } = useQuery(
+    ["tvImages", { id: id }],
+    getTvShowImages
+  );
+  let posters;
+  if (images) {
+    posters = images.posters;
   }
 
-  
-
-
-  if (isLoading) {
+  if (showIsLoading || imagesIsLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
+  if (showIsError || imagesIsError) {
+    return <h1>{showError?.message || imagesError?.message}</h1>;
   }
 
-  if (show) {
-    return (
-      <>
-        {show ? (
-          <>
-            <PageTemplate show={show}>
-              <TvDetails show={show} />
-            </PageTemplate>
-          </>
-        ) : (
-          <p>Waiting for TV show details</p>
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {show && images && (
+        <TemplateMediaDetailsPage>
+          <MediaHeader>
+            <MediaHeaderInsert media={show} />
+          </MediaHeader>  
+          <MediaImageList images={posters} />
+          <TvDetails show={show} />
+        </TemplateMediaDetailsPage>
+      )}
+      {!show || !images && (
+        <p>Waiting for movie details</p>
+      )}
+    </>
+  );
 };
 
 export default TvDetailsPage;

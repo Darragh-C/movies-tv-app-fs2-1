@@ -1,44 +1,51 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
-import TemplateMoviePage from "../components/templateMoviePage";
-import { getMovie } from '../api/tmdb-api'
+import { getMovie, getMovieImages } from '../api/tmdb-api'
 import { useQuery } from "react-query";
-import Spinner from '../components/spinner'
+import Spinner from '../components/spinner';
+import TemplateMediaDetailsPage from "../components/templateMediaDetailsPage";
+import MediaImageList from "../components/imageLists/mediaImageList";
+import MediaHeader from "../components/MediaHeader";
+import MediaHeaderInsert from "../components/headerInserts/MediaHeaderInsert";
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
-  console.log(`show id at tvDetailsPage: ${id}`);
 
-  const { data: movie, error, isLoading, isError } = useQuery(
-    ["movie", { id: id }],
+  const { data: movie, error: movieError, isLoading: movieLoading, isError: isMovieError } = useQuery(
+    ["movie", { id }],
     getMovie
   );
 
-  // console.log(`show object at tvDetailsPage: ${movie}`);
- 
-  // console.log("show at tvDetailsPage:");
-  // Object.keys(movie).forEach(key => {
-  //   console.log(`${key}: ${show[key]}`);
-  // });
-
-  if (isLoading) {
+  const { data: images, error: movieImagesError, isLoading: movieImagesLoading, isError: isMovieImagesError } = useQuery(
+    ["movieImages", { id: id }],
+    getMovieImages
+  );
+  let posters;
+  if (images) {
+    posters = images.posters;
+  }
+  
+  if (movieImagesLoading || movieLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
+  if (isMovieImagesError || isMovieError) {
+    return <h1>{movieImagesError?.message || movieError?.message}</h1>;
   }
 
   return (
     <>
-      {movie ? (
-        <>
-          <TemplateMoviePage movie={movie}>
-            <MovieDetails movie={movie} />
-          </TemplateMoviePage>
-        </>
-      ) : (
+      {movie && images && (
+        <TemplateMediaDetailsPage>
+          <MediaHeader>
+            <MediaHeaderInsert media={movie} />
+          </MediaHeader>  
+          <MediaImageList images={posters} />
+          <MovieDetails movie={movie} />
+        </TemplateMediaDetailsPage>
+      )}
+      {!movie || !images && (
         <p>Waiting for movie details</p>
       )}
     </>

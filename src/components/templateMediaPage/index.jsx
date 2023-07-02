@@ -1,41 +1,25 @@
 import React from "react";
 import MediaHeader from "../MediaHeader";
 import MediaHeaderInsert from "../headerInserts/MediaHeaderInsert";
-import { getTvShowImages } from "../../api/tmdb-api";
+import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 import TemplateMediaDetailsPage from "../templateMediaDetailsPage";
-import TvDetails from "../tvDetails";
+import MovieDetails from "../movieDetails";
 import MediaImageList from "../imageLists/mediaImageList";
 
-const TemplateTvPage = ({ show }) => {
 
-  const { data , error, isLoading, isError } = useQuery(
-    ["tvImages", { id: show.id }],
-    getTvShowImages
-  );
-  
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  
-  const images = data.posters 
+const TemplateMediaPage = ({ movie, images }) => {
 
   return (
     <TemplateMediaDetailsPage>
       <MediaHeader>
-        <MediaHeaderInsert media={show}/>
+        <MediaHeaderInsert media={movie}/>
       </MediaHeader>  
       <MediaImageList images={images}/>
-      <TvDetails show={show}/>
+      <MovieDetails movie={movie}/>
     </TemplateMediaDetailsPage>
   );
-
-  
 };
 
-export default TemplateTvPage;
+export default TemplateMoviePage;
