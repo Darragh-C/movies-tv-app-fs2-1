@@ -1,4 +1,4 @@
-import React, { useState, useEffect, setState } from "react";
+import React, { useContext } from "react";
 import CardListPage from "../components/cardListPage";
 import { getMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
@@ -7,8 +7,9 @@ import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import { MoviesContext } from "../contexts/moviesContext";
 
 const MoviesPage = (props) => {
-  const context = setState(MoviesContext);
+  const context = useContext(MoviesContext);
   context.setBasePath("movies");
+  console.log(context.linkBasePath);
 
   const { data, error, isLoading, isError } = useQuery("discover", getMovies);
 

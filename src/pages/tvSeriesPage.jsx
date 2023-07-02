@@ -7,8 +7,9 @@ import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import { MoviesContext } from "../contexts/moviesContext";
 
 const TvSeriesPage = (props) => {
-  const context = setState(MoviesContext);
-  context.setBasePath("tv");
+  const context = useContext(MoviesContext);
+  context.setBasePath("tvshows");
+  console.log(context.linkBasePath);
 
   const { data, error, isLoading, isError } = useQuery("tvseries", getTvSeries);
 
