@@ -44,7 +44,7 @@ export default function MovieReviews({ movie }) {
               </TableCell>
               <TableCell >{excerpt(r.content)}</TableCell>
               <TableCell >
-                            <Link
+                <Link
                   to={`/reviews/${r.id}`}
                   state={{
                       review: r,

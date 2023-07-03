@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
-
+import { getCast } from '../../api/tmdb-api'
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews'
+import CastList from "../castList";
 
 const styles = {
   chipSet: {
@@ -31,7 +34,16 @@ const styles = {
   },
 };
 
-const MovieDetails = ( {movie}) => {
+const MovieDetails = ( { movie }) => {
+  const { id } = useParams();
+
+  const { data: cast, error: castError, isLoading: castLoading, isError: isCastError } = useQuery(
+    ["cast", { id }],
+    getCast
+  );
+
+  console.log(`cast: ${cast}`);
+
   const [drawerOpen, setDrawerOpen] = useState(false); 
   return (
     <>
@@ -73,6 +85,9 @@ const MovieDetails = ( {movie}) => {
           <Chip label={`Released: ${movie.release_date}`} />
         )}
       </Paper>
+
+      <CastList cast={cast.cast}/>
+
       <Fab    
         color="secondary"
         variant="extended"
