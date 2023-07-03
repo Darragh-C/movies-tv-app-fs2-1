@@ -8,8 +8,9 @@ import { MoviesContext } from "../contexts/moviesContext";
 
 const TvSeriesPage = (props) => {
   const context = useContext(MoviesContext);
-  context.setBasePath("tvshows");
-  console.log(context.linkBasePath);
+  if (context.basePath !== "tvshows") {
+    context.setBasePath("tvshows");
+  }
 
   const { data, error, isLoading, isError } = useQuery("tvseries", getTvSeries);
 

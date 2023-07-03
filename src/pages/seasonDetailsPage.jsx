@@ -1,26 +1,30 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import SeasonDetails from "../components/seasonDetails";
-import PageTemplate from "../components/templateTvPage";
 import { getTvSeason, getShow } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
-
+import TemplateMediaDetailsPage from "../components/templateMediaDetailsPage";
+import TvSeasonPoster from "../components/imageLists/tvSeasonPoster";
+import MediaHeader from "../components/MediaHeader";
+import MediaHeaderInsert from "../components/headerInserts/MediaHeaderInsert";
 
 const SeasonDetailsPage = () => {
   const { seriesId, seasonNum } = useParams();
   console.log(`show id at tvDetailsPage: ${seriesId, seasonNum}`);
 
-  const { data: season, error, isLoading, isError } = useQuery(
+  const { data: season, error: seasonError, isLoading: seasonIsLoading, isError: seasonIsError } = useQuery(
     ["tvSeason", { seriesId: seriesId, seasonNum: seasonNum }],
     getTvSeason
   );
+  console.log(`season: ${season}`);
 
   //get show from cache
-  const { data: show, showError, showIsLoading, showIsError } = useQuery(
+  const { data: show, error: showError, isLoading: showIsLoading, isError: showIsError } = useQuery(
     ["show", { id: seriesId }],
     getShow
   );
+  console.log(`show: ${show}`);
   
   if (season) {
     console.log(`show object at tvDetailsPage: ${season}`);
@@ -31,29 +35,30 @@ const SeasonDetailsPage = () => {
     });
   }
 
-  if (isLoading) {
+  if (seasonIsLoading || showIsLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
+  if (seasonIsError || showIsError) {
+    return <h1>{seasonError?.message || showError?.message}</h1>;
   }
 
-  if (season) {
-    return (
-      <>
-        {season ? (
-          <>
-            <PageTemplate season={season} show={show} >
-              <SeasonDetails season={season} show={show} />
-            </PageTemplate>
-          </>
-        ) : (
-          <p>Waiting for TV show details</p>
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {season ? (
+        <TemplateMediaDetailsPage>
+          <MediaHeader>
+            <MediaHeaderInsert media={show} />
+          </MediaHeader>  
+          <TvSeasonPoster posterPath={season.poster_path} />
+          <SeasonDetails season={season} />
+        </TemplateMediaDetailsPage>
+      ) : (
+        <p>Waiting for TV season details</p>
+      )}
+    </>
+  );
+  
 };
 
 export default SeasonDetailsPage;
