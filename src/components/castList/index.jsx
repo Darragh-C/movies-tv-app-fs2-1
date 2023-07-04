@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import Chip from "@mui/material/Chip";
 
 const styles = {
   chipSet: {
@@ -25,15 +26,18 @@ const styles = {
   },
 };
 
+
+
 const CastList = ( { cast } ) => {
   return (
     <>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <br></br>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', alignItems: "center" }}>
         {cast.map((c, index) => (
           <React.Fragment key={index}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar src={c.id ? `https://www.themoviedb.org/t/p/w276_and_h350_face${c.profile_path}` : "/static/images/avatar/1.jpg"} />
               </ListItemAvatar>
               <ListItemText
                 primary={c.name}
@@ -46,9 +50,11 @@ const CastList = ( { cast } ) => {
                       color="text.primary"
                     >
                       {c.character}
+                      <Chip sx={styles.chipLabel} label={c.known_for_department} />
+  
                     </Typography>
                   </React.Fragment>
-                }
+                } 
               />
             </ListItem>
             <Divider variant="inset" component="li" />

@@ -138,10 +138,6 @@ export const getTvSeries = () => {
 };
 
 export const getShow = (args) => {
-  console.log("get show args:");
-  Object.keys(args).forEach(key => {
-    console.log(`${key}: ${args[key]}`);
-  });
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
@@ -158,10 +154,6 @@ export const getShow = (args) => {
 };
 
 export const getTvSeason = (args) => {
-  console.log("get season args:");
-  Object.keys(args).forEach(key => {
-    console.log(`${key}: ${args[key]}`);
-  });
   const [ , ids ] = args.queryKey;
   const { seriesId, seasonNum } = ids;
   return fetch(

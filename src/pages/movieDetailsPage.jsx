@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
-import { getMovie, getMovieImages } from '../api/tmdb-api'
+import { getMovie, getMovieImages, getCast } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import TemplateMediaDetailsPage from "../components/templateMediaDetailsPage";
@@ -25,13 +25,18 @@ const MovieDetailsPage = () => {
   if (images) {
     posters = images.posters;
   }
+
+  const { data: cast, error: castError, isLoading: castLoading, isError: isCastError } = useQuery(
+    ["cast", { id: id }],
+    getCast
+  );
   
-  if (movieImagesLoading || movieLoading) {
+  if (movieImagesLoading || movieLoading || castLoading) {
     return <Spinner />;
   }
 
-  if (isMovieImagesError || isMovieError) {
-    return <h1>{movieImagesError?.message || movieError?.message}</h1>;
+  if (isMovieImagesError || isMovieError || isCastError) {
+    return <h1>{movieImagesError?.message || movieError?.message || castError?.message}</h1>;
   }
 
   return (
@@ -42,7 +47,7 @@ const MovieDetailsPage = () => {
             <MediaHeaderInsert media={movie} />
           </MediaHeader>  
           <MediaImageList images={posters} />
-          <MovieDetails movie={movie} />
+          <MovieDetails movie={movie} cast={cast.cast}/>
         </TemplateMediaDetailsPage>
       )}
       {!movie || !images && (
