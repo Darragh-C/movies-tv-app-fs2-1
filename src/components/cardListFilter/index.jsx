@@ -32,6 +32,8 @@ export default function CardListFilter(props) {
 
   const sortingOptions = [ "Rating", "Latest", "Oldest", "Popular" ];
 
+  const ratingOptions = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -61,13 +63,17 @@ export default function CardListFilter(props) {
     handleUserImput(e, "sort", e.target.value);
   };
 
+  const handleRatingChange = (e) => {
+    handleUserImput(e, "rating", e.target.value);
+  };
+
   return (
     <>
     <Card sx={styles.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h1">
           <FilterAltIcon fontSize="large" />
-          Filter the movies.
+          Filter movies
         </Typography>
         <TextField
           sx={styles.formControl}
@@ -95,13 +101,30 @@ export default function CardListFilter(props) {
             })}
           </Select>
         </FormControl>
+        <FormControl sx={styles.formControl}>
+          <InputLabel id="rating-label">Rating</InputLabel>
+          <Select
+            labelId="rating-label"
+            id="rating-select"
+            value={props.ratingFilter}
+            onChange={handleRatingChange}
+          >
+            {ratingOptions.slice().reverse().map((rating) => {
+              return (
+                <MenuItem key={rating} value={rating}>
+                  {rating} +
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </CardContent>
     </Card>
     <Card sx={styles.root} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h1">
             <SortIcon fontSize="large" />
-            Sort the movies.
+            Sort movies
           </Typography>
           <FormControl sx={styles.formControl}>
           <Select

@@ -24,6 +24,7 @@ function CardListPage({ movies, title, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [sortOption, setSortOption] = useState("Popular");
+  const [ratingFilter, setRatingFilter] = useState("1");
 
   console.log(`genreFilter: ${genreFilter}`);
   console.log(`sortOption: ${sortOption}`);
@@ -37,6 +38,9 @@ function CardListPage({ movies, title, action }) {
   })
   .filter((m) => {
     return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+  })
+  .filter((m) => {
+    return m.vote_average >= ratingFilter;
   })
   .sort((a,b) => {
     if (sortOption === "Rating") {
@@ -57,6 +61,8 @@ function CardListPage({ movies, title, action }) {
       setGenreFilter(value);
     } else if (type === "sort") {
       setSortOption(value);
+    } else {
+      setRatingFilter(value);
     }
   };
 
@@ -93,6 +99,7 @@ function CardListPage({ movies, title, action }) {
           titleFilter={titleFilter}
           genreFilter={genreFilter}
           sortOption={sortOption}
+          ratingFilter={ratingFilter}
         />
       </Drawer>
     </>  
