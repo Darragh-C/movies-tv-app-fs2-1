@@ -23,7 +23,7 @@ function CardListPage({ movies, title, action }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("Popular");
 
   console.log(`genreFilter: ${genreFilter}`);
   console.log(`sortOption: ${sortOption}`);
