@@ -43,14 +43,23 @@ function CardListPage({ movies, title, action }) {
     return m.vote_average >= ratingFilter;
   })
   .sort((a,b) => {
-    if (sortOption === "Rating") {
-      return b.vote_average - a.vote_average
-    } else if (sortOption === "Oldest") {
-      return new Date(a.release_date) - new Date(b.release_date)
-    } else if (sortOption === "Latest") {
-      return new Date(b.release_date) - new Date(a.release_date)
-    } else {
-      return b.popularity - a.popularity
+    switch (sortOption) {
+      case "Rating":
+        return b.vote_average - a.vote_average;
+      case "Oldest":
+        if (a.release_date) {
+          return new Date(a.release_date) - new Date(b.release_date);
+        } else {
+          return new Date(a.first_air_date) - new Date(b.first_air_date);
+        }
+      case "Latest":
+        if (a.release_date) {
+          return new Date(b.release_date) - new Date(a.release_date);
+        } else {
+          return new Date(b.first_air_date) - new Date(a.first_air_date);
+        }
+      default:
+        return b.popularity - a.popularity;
     }
   });
 
