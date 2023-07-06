@@ -43,9 +43,11 @@ function CardListPage({ movies, title, action }) {
       return b.vote_average - a.vote_average
     } else if (sortOption === "Oldest") {
       return new Date(a.release_date) - new Date(b.release_date)
-    } else {
+    } else if (sortOption === "Latest") {
       return new Date(b.release_date) - new Date(a.release_date)
-    } 
+    } else {
+      return b.popularity - a.popularity
+    }
   });
 
   const handleChange = (type, value) => {

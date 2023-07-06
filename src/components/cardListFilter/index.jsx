@@ -30,7 +30,7 @@ const styles = {
 export default function CardListFilter(props) {
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
-  const sortingOptions = [ "Rating", "Latest", "Oldest" ];
+  const sortingOptions = [ "Rating", "Latest", "Oldest", "Popular" ];
 
   if (isLoading) {
     return <Spinner />;
