@@ -23,6 +23,10 @@ function CardListPage({ movies, title, action }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortOption, setSortOption] = useState("");
+
+  console.log(`genreFilter: ${genreFilter}`);
+  console.log(`sortOption: ${sortOption}`);
 
   const genreId = Number(genreFilter);
 
@@ -33,11 +37,25 @@ function CardListPage({ movies, title, action }) {
   })
   .filter((m) => {
     return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+  })
+  .sort((a,b) => {
+    if (sortOption === "Rating") {
+      return b.vote_average - a.vote_average
+    } else if (sortOption === "Oldest") {
+      return new Date(a.release_date) - new Date(b.release_date)
+    } else {
+      return new Date(b.release_date) - new Date(a.release_date)
+    } 
   });
 
   const handleChange = (type, value) => {
-    if (type === "title") setTitleFilter(value);
-    else setGenreFilter(value);
+    if (type === "title") {
+      setTitleFilter(value);
+    } else if (type === "genre") {
+      setGenreFilter(value);
+    } else if (type === "sort") {
+      setSortOption(value);
+    }
   };
 
   return (
@@ -72,6 +90,7 @@ function CardListPage({ movies, title, action }) {
           onUserInput={handleChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          sortOption={sortOption}
         />
       </Drawer>
     </>  

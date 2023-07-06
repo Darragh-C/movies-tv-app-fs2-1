@@ -30,6 +30,8 @@ const styles = {
 export default function CardListFilter(props) {
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
+  const sortingOptions = [ "Rating", "Latest", "Oldest" ];
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -55,6 +57,9 @@ export default function CardListFilter(props) {
     handleUserImput(e, "genre", e.target.value);
   };
 
+  const handleSortOption = (e) => {
+    handleUserImput(e, "sort", e.target.value);
+  };
 
   return (
     <>
@@ -98,6 +103,22 @@ export default function CardListFilter(props) {
             <SortIcon fontSize="large" />
             Sort the movies.
           </Typography>
+          <FormControl sx={styles.formControl}>
+          <Select
+            labelId="sort-label"
+            id="sort-select"
+            value={props.sortOption}
+            onChange={handleSortOption}
+          >
+            {sortingOptions.map((option) => {
+              return (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         </CardContent>
       </Card>
       </>
