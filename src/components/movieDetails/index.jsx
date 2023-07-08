@@ -15,19 +15,11 @@ import MovieReviews from '../movieReviews'
 import CastList from "../castList";
 import Spinner from '../../components/spinner';
 
+import MovieMetadata from "../movieDetailsComponents/movieMetadata";
+import MovieBio from "../movieDetailsComponents/movieBio";
+import GenreTags from "../movieDetailsComponents/genreTags";
+
 const styles = {
-  chipSet: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    listStyle: "none",
-    padding: 1.5,
-    margin: 0,
-  },
-  chipLabel: {
-    margin: 0.5,
-  },
   fab: { 
     position: "fixed",
     top: 50,
@@ -43,45 +35,9 @@ const MovieDetails = ( { movie, cast }) => {
   const [drawerOpen, setDrawerOpen] = useState(false); 
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
-      </Typography>
-
-      <Typography variant="h6" component="p">
-        {movie.overview}
-      </Typography>
-
-      {movie.genres && movie.genres.every((g) => g.name) && (
-        <Paper component="ul" sx={styles.chipSet}>
-          <li>
-            <Chip label="Genres" sx={styles.chipLabel} color="primary" />
-          </li>
-          {movie.genres.map((g) => (
-            <li key={g.name}>
-              <Chip label={g.name} />
-            </li>
-          ))}
-        </Paper>
-      )}
-      <Paper component="ul" sx={styles.chipSet}>
-        {movie.runtime && (
-          <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-        )}
-        {movie.revenue && (
-          <Chip
-            icon={<MonetizationIcon />}
-            label={`${movie.revenue.toLocaleString()}`}
-          />
-        )}
-        <Chip
-          icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count}`}
-        />
-        {movie.release_date && (
-          <Chip label={`Released: ${movie.release_date}`} />
-        )}
-      </Paper>
-
+      <MovieBio movie={movie} />
+      <GenreTags media={movie} />
+      <MovieMetadata movie={movie} />
       <CastList cast={cast}/>
 
       <Fab    
