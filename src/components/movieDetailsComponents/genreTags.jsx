@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
+import AddGenreTags from "../forms/addGenreTags";
 
 const styles = {
   chipSet: {
@@ -22,17 +23,23 @@ const GenreTags = ( { media }) => {
 
   return (
     <>
-      {media.genres && media.genres.every((g) => g.name) && (
-        <Paper component="ul" sx={styles.chipSet}>
-          <li>
-            <Chip label="Genres" sx={styles.chipLabel} color="primary" />
-          </li>
-          {media.genres.map((g) => (
-            <li key={g.name}>
-              <Chip label={g.name} />
-            </li>
-          ))}
-        </Paper>
+     {media ? (
+        <>
+          {media.genres && media.genres.every((g) => g.name) && (
+            <Paper component="ul" sx={styles.chipSet}>
+              <li>
+                <Chip label="Genres" sx={styles.chipLabel} color="primary" />
+              </li>
+              {media.genres.map((g) => (
+                <li key={g.name}>
+                  <Chip label={g.name} />
+                </li>
+              ))}
+            </Paper>
+          )}
+        </>
+      ) : (
+        <AddGenreTags/>
       )}
     </>
   );

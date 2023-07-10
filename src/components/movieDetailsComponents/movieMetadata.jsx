@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
+import AddMovieMetadata from "../forms/addMovieMetadata";
 
 const styles = {
   chipSet: {
@@ -20,25 +21,29 @@ const styles = {
 const MovieMetadata = ( { movie }) => { 
   return (
     <>
-      <Paper component="ul" sx={styles.chipSet}>
-        {movie.runtime && (
-          <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-        )}
-        {movie.revenue && (
+      {movie ? (
+        <Paper component="ul" sx={styles.chipSet}>
+          {movie.runtime && (
+            <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+          )}
+          {movie.revenue && (
+            <Chip
+              icon={<MonetizationIcon />}
+              label={`${movie.revenue.toLocaleString()}`}
+            />
+          )}
           <Chip
-            icon={<MonetizationIcon />}
-            label={`${movie.revenue.toLocaleString()}`}
+            icon={<StarRate />}
+            label={`${movie.vote_average} ${movie.vote_count}`}
           />
-        )}
-        <Chip
-          icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count}`}
-        />
-        {movie.release_date && (
-          <Chip label={`Released: ${movie.release_date}`} />
-        )}
-      </Paper>
-    </>
+          {movie.release_date && (
+            <Chip label={`Released: ${movie.release_date}`} />
+          )}
+        </Paper>
+      ) : (
+        <AddMovieMetadata/>
+      )}
+    </>  
   );
 };
-export default  MovieMetadata ;
+export default  MovieMetadata;

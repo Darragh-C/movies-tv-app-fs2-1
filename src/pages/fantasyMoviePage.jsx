@@ -8,23 +8,21 @@ import TemplateMediaDetailsPage from "../components/templateMediaDetailsPage";
 import MediaImageList from "../components/imageLists/mediaImageList";
 import MediaHeader from "../components/MediaHeader";
 import MediaHeaderInsert from "../components/headerInserts/MediaHeaderInsert";
+import FantasyMoviePoster from "../components/imageLists/fantasyMoviePoster";
+import FantasyMovieDetails from "../components/fantasyMovieDetails";
+import FastasyMediaHeaderInsert from "../components/headerInserts/fantasyMovieHeaderInsert";
 
 const FantasyMoviePage = () => {
 
   return (
     <>
-      {movie && images && (
-        <TemplateMediaDetailsPage>
-          <MediaHeader>
-            <FantasyMovieHeaderInsert media={movie} />
-          </MediaHeader>  
-          <FantasyMoviePoster images={posters} />
-          <FantasyMovieDetails movie={movie} cast={cast.cast}/>
-        </TemplateMediaDetailsPage>
-      )}
-      {!movie || !images && (
-        <p>Waiting for movie details</p>
-      )}
+      <TemplateMediaDetailsPage>
+        <MediaHeader>
+          <FastasyMediaHeaderInsert/>
+        </MediaHeader>
+        <FantasyMoviePoster />
+        <FantasyMovieDetails/>
+      </TemplateMediaDetailsPage>
     </>
   );
 };
