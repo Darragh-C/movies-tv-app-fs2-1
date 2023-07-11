@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import MovieMetadata from "../movieDetailsComponents/movieMetadata";
 import MovieBio from "../movieDetailsComponents/movieBio";
 import GenreTags from "../movieDetailsComponents/genreTags";
-import AddMovieBio from "../forms/addMovieBio";
 import Grid from "@mui/material/Grid";
+import SubmitText from "../forms/submitText";
 
 const styles = {
   fab: { 
@@ -13,19 +13,7 @@ const styles = {
   },
 };
 
-const FantasyMovieDetails = () => {
-
-  const [movie, setMovie] = useState({
-    overview: "",
-  });
-
-  const handleBioUpdate = (data) => {
-    setMovie((prevMovie) => ({
-      ...prevMovie,
-      overview: data,
-    }));
-    console.log("new movie overview:", movie.overview);
-  };
+const FantasyMovieDetails = ({ movie, action }) => {
  
   return (
     <Grid container spacing={2}>
@@ -33,7 +21,13 @@ const FantasyMovieDetails = () => {
         <MovieBio movie={movie}/>
       </Grid>
       <Grid item xs={4}>
-        <AddMovieBio onAction={handleBioUpdate}/>
+        <SubmitText label={"title"} onAction={action}/>
+      </Grid>
+      <Grid item xs={8}>
+
+      </Grid>
+      <Grid item xs={4}>
+      <SubmitText label={"overview"} onAction={action}/>
       </Grid>
       <Grid item xs={8}>
 

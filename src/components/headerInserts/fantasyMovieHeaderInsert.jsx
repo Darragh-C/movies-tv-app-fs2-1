@@ -2,15 +2,19 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import HomeIcon from '@mui/icons-material/Home';
 
-const FastasyMediaHeaderInsert = ( {  } ) => {
+const FastasyMediaHeaderInsert = ( { title } ) => {
 
   return (
     <>
-
-        <Typography variant="h4" component="h3">
-          Your fantasy title
-        </Typography>
-
+        {title ? (
+          <Typography variant="h4" component="h3">
+            {title}
+          </Typography>
+        ) : (
+          <Typography variant="h4" component="h3">
+            Your fantasy title
+          </Typography>
+        )}
     </>
     
   );

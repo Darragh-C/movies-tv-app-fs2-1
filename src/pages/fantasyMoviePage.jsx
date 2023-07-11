@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import { getMovie, getMovieImages, getCast } from '../api/tmdb-api'
@@ -14,14 +14,44 @@ import FastasyMediaHeaderInsert from "../components/headerInserts/fantasyMovieHe
 
 const FantasyMoviePage = () => {
 
+  
+  const [movie, setMovie] = useState({
+    title: "",
+    overview: "",
+  });
+
+  const handleUpdate = (data) => {
+    const {name, value} = data;
+
+    if (name === "title") {
+      handleTitleUpdate(value)
+    } else if (name === "overview") {
+      handleOverviewUpdate(value)
+    }
+  };
+
+  const handleTitleUpdate = (data) => {
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      title: data,
+    }));
+  };
+
+  const handleOverviewUpdate = (data) => {
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      overview: data,
+    }));
+  };
+
   return (
     <>
       <TemplateMediaDetailsPage>
         <MediaHeader>
-          <FastasyMediaHeaderInsert/>
+          <FastasyMediaHeaderInsert title={movie.title}/>
         </MediaHeader>
         <FantasyMoviePoster />
-        <FantasyMovieDetails/>
+        <FantasyMovieDetails movie={movie} action={handleUpdate}/>
       </TemplateMediaDetailsPage>
     </>
   );

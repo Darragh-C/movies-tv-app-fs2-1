@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
 
-function AddMovieBio({ onAction }) {
-  const [formData, setFormData] = useState("");
-  let action = "";
-
-  if (formData) {
-    console.log(formData);
-  }
+function SubmitText({ label, onAction }) {
+  const [formData, setFormData] = useState({});
 
   const handleInputChange = (event) => {
-    const newData = event.target.value;
-    setFormData(newData);
+    const {name, value} = event.target;
+    const data = {
+      name: name,
+      value: value,
+    }
+    setFormData(data);
+
   };
 
   const handleSubmit = (event) => {
     onAction(formData);
     event.preventDefault();
+    setFormData({
+      name: "",
+      value: "",
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Add Movie Bio:
+        Add {label}:
         <input
           type="text"
-          name="overview"
-          value={formData}
+          name={label}
+          value={formData.value}
           onChange={handleInputChange}
         />
       </label>
@@ -35,4 +39,4 @@ function AddMovieBio({ onAction }) {
   );
 }
 
-export default AddMovieBio;
+export default SubmitText;
