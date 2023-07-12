@@ -1,39 +1,86 @@
 import React, { useState } from 'react';
+import { getGenres } from "../../api/tmdb-api";
+import { useQuery } from "react-query";
+import Spinner from '../spinner';
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-function AddGenreTags() {
-  const [formData, setFormData] = useState({
-    genre: '',
-  });
+const styles = {
+  root: {
+    maxWidth: 345,
+  },
+  media: { height: 300 },
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  formControl: {
+    margin: 1,
+    minWidth: 220,
+    backgroundColor: "rgb(255, 255, 255)",
+  },
+};
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData);
+function AddGenreTags({ onAction }) {
+  const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
-  };
+  const [selectedGenre, setSelectedGenre] = useState("0");
+
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
+    const data = {
+      name: "genre",
+      value: e.target.value
+    }
+    console.log(data);
+    onAction(data);
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
+
+  const genres = data.genres;
+  if (genres[0].name !== "All") {
+    genres.unshift({ id: "0", name: "All" });
+  }
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(formData);
+
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Add Genre Tags:
-        <input
-          type="text"
-          name="movie-bio"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <FormControl sx={styles.formControl}>
+      <InputLabel id="genre-label">Genre</InputLabel>
+      <Select
+        labelId="genre-label"
+        id="genre-select"
+        value={selectedGenre}
+        onChange={handleGenreChange}
+      >
+        {genres.map((genre) => {
+          return (
+            <MenuItem key={genre.id} value={genre.id}>
+              {genre.name}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 }
 
 export default AddGenreTags;
+

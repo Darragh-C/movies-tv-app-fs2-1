@@ -18,6 +18,7 @@ const FantasyMoviePage = () => {
   const [movie, setMovie] = useState({
     title: "",
     overview: "",
+    genres: [],
   });
 
   const handleUpdate = (data) => {
@@ -27,21 +28,32 @@ const FantasyMoviePage = () => {
       handleTitleUpdate(value)
     } else if (name === "overview") {
       handleOverviewUpdate(value)
+    } else if (name === "genre") {
+      handleGenreUpdate(value)
     }
   };
 
-  const handleTitleUpdate = (data) => {
+  const handleTitleUpdate = (val) => {
     setMovie((prevMovie) => ({
       ...prevMovie,
-      title: data,
+      title: val,
     }));
   };
 
-  const handleOverviewUpdate = (data) => {
+  const handleOverviewUpdate = (val) => {
     setMovie((prevMovie) => ({
       ...prevMovie,
-      overview: data,
+      overview: val,
     }));
+  };
+
+  const handleGenreUpdate = (val) => {
+    console.log(`handleGenreUpdate: ${val}`)
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      genres: [...prevMovie.genres, val]
+    }));
+    console.log(`movie genres: ${movie.genres}`)
   };
 
   return (

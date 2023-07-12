@@ -4,6 +4,7 @@ import MovieBio from "../movieDetailsComponents/movieBio";
 import GenreTags from "../movieDetailsComponents/genreTags";
 import Grid from "@mui/material/Grid";
 import SubmitText from "../forms/submitText";
+import AddGenreTags from "../forms/addGenreTags";
 
 const styles = {
   fab: { 
@@ -30,10 +31,10 @@ const FantasyMovieDetails = ({ movie, action }) => {
       <SubmitText label={"overview"} onAction={action}/>
       </Grid>
       <Grid item xs={8}>
-
+        <GenreTags movie={movie}/>
       </Grid>
       <Grid item xs={4}>
-        <GenreTags/>
+        <AddGenreTags onAction={action}/>
       </Grid>
       <Grid item xs={8}>
 
