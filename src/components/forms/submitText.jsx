@@ -6,7 +6,7 @@ function SubmitText({ label, onAction }) {
   const handleInputChange = (event) => {
     const {name, value} = event.target;
     const data = {
-      name: name,
+      type: name,
       value: value,
     }
     setFormData(data);
@@ -17,7 +17,7 @@ function SubmitText({ label, onAction }) {
     onAction(formData);
     event.preventDefault();
     setFormData({
-      name: "",
+      type: "",
       value: "",
     });
   };

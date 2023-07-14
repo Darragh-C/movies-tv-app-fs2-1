@@ -19,18 +19,18 @@ const styles = {
   },
 };
 
-const GenreTags = ( { movie }) => {
+const GenreTags = ( { media }) => {
 
   return (
     <>
-     {movie.genres && (
+     {media.genres.name ? (
         <>
-          {movie.genres && movie.genres.every((g) => g.name) && (
+          {media.genres && media.genres.every((g) => g.name) && (
             <Paper component="ul" sx={styles.chipSet}>
               <li>
                 <Chip label="Genres" sx={styles.chipLabel} color="primary" />
               </li>
-              {movie.genres.map((g) => (
+              {media.genres.map((g) => (
                 <li key={g.name}>
                   <Chip label={g.name} />
                 </li>
@@ -38,8 +38,21 @@ const GenreTags = ( { movie }) => {
             </Paper>
           )}
         </>
+      ) : media.genres.length > 0 && (
+        <>
+          <Paper component="ul" sx={styles.chipSet}>
+            <li>
+              <Chip label="Genres" sx={styles.chipLabel} color="primary" />
+            </li>
+            {media.genres.map((g) => (
+              <li key={g}>
+                <Chip label={g} />
+              </li>
+            ))}
+          </Paper>
+      </> 
       )}
     </>
   );
 };
-export default GenreTags;
+export default  GenreTags;

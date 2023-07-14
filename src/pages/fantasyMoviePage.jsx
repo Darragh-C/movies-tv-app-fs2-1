@@ -22,13 +22,13 @@ const FantasyMoviePage = () => {
   });
 
   const handleUpdate = (data) => {
-    const {name, value} = data;
+    const {type, value} = data;
 
-    if (name === "title") {
+    if (type === "title") {
       handleTitleUpdate(value)
-    } else if (name === "overview") {
+    } else if (type === "overview") {
       handleOverviewUpdate(value)
-    } else if (name === "genre") {
+    } else if (type === "genre") {
       handleGenreUpdate(value)
     }
   };
@@ -53,7 +53,7 @@ const FantasyMoviePage = () => {
       ...prevMovie,
       genres: [...prevMovie.genres, val]
     }));
-    console.log(`movie genres: ${movie.genres}`)
+    console.log(`genre val: ${val}`)
   };
 
   return (

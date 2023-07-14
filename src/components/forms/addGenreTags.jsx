@@ -23,14 +23,17 @@ const styles = {
 function AddGenreTags({ onAction }) {
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
-  const [selectedGenre, setSelectedGenre] = useState("0");
+  const [selectedGenre, setSelectedGenre] = useState("");
+  // const [selectedId, setSelectedId] = useState(0);
 
   const handleGenreChange = (e) => {
+    console.log()
     setSelectedGenre(e.target.value);
     const data = {
-      name: "genre",
-      value: e.target.value
+      type: "genre",
+      value: e.target.value,
     }
+
     console.log(data);
     onAction(data);
   }
@@ -66,13 +69,13 @@ function AddGenreTags({ onAction }) {
       <InputLabel id="genre-label">Genre</InputLabel>
       <Select
         labelId="genre-label"
-        id="genre-select"
+        id="genre-id"
         value={selectedGenre}
         onChange={handleGenreChange}
       >
         {genres.map((genre) => {
           return (
-            <MenuItem key={genre.id} value={genre.id}>
+            <MenuItem key={genre.id} value={genre.name}>
               {genre.name}
             </MenuItem>
           );
