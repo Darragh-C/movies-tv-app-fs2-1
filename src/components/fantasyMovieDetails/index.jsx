@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MovieMetadata from "../movieDetailsComponents/movieMetadata";
+import AddCast from "../forms/addCast";
 import MovieBio from "../movieDetailsComponents/movieBio";
 import GenreTags from "../movieDetailsComponents/genreTags";
 import Grid from "@mui/material/Grid";
@@ -40,7 +40,7 @@ const FantasyMovieDetails = ({ movie, action }) => {
 
       </Grid>
       <Grid item xs={4}>
-        <MovieMetadata/>
+        <AddCast/>
       </Grid>
     </Grid>
   );

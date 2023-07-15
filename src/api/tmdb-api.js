@@ -63,6 +63,26 @@ export const getCastMember = (args) => {
  });
 };
 
+
+const totalPages = 100;
+
+function getPopularCastPage(page) {
+  const url = `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=` + page;
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => json.results);
+}
+
+export const getAllPolularCastPages = async () => {
+  const allCast = [];
+  for (let page = 1; page <= totalPages; page++) {
+    const returnedPage = await getPopularCastPage(page);
+    const castNames = returnedPage.map((obj) => obj.name);
+    Array.prototype.push.apply(allCast, castNames);
+  }
+  return allCast;
+}
+
 export const getGenres = async () => {
   return fetch(
     "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
