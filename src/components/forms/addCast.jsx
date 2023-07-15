@@ -9,7 +9,10 @@ const AddCast = ({ }) => {
 
   const { data, error, isLoading, isError } = useQuery("popular-cast", getAllPolularCastPages);
 
- 
+  let cast;
+  if (data) {
+    cast = data.map((c) => c.name);
+  }
 
   if (isLoading) {
     return <Spinner />;
@@ -23,8 +26,12 @@ const AddCast = ({ }) => {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={data}
+      options={cast}
       sx={{ width: 300 }}
+      onChange={(selectedCast) => {
+        console.log("Selected Value:", selectedCast.target.innerText);
+        //addCast(selectedValue);
+      }}
       renderInput={(params) => <TextField {...params} label="Cast" />}
     />
   );

@@ -77,7 +77,10 @@ export const getAllPolularCastPages = async () => {
   const allCast = [];
   for (let page = 1; page <= totalPages; page++) {
     const returnedPage = await getPopularCastPage(page);
-    const castNames = returnedPage.map((obj) => obj.name);
+    const castNames = returnedPage.map((obj) => ({
+      name: obj.name,
+      profile: obj.profile_path
+    }));
     Array.prototype.push.apply(allCast, castNames);
   }
   return allCast;
