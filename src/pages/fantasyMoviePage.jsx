@@ -32,6 +32,7 @@ const FantasyMoviePage = () => {
     } else if (type === "genre") {
       handleGenreUpdate(value)
     } else if (type === "cast") {
+      console.log("handleCastUpdate", value)
       handleCastUpdate(value)
     }
   };

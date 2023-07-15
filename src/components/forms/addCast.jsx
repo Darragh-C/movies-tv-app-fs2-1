@@ -26,7 +26,11 @@ const AddCast = ({ onAction }) => {
     const castObject = data.filter((o) => o.name === castName);
     const castTypeObject = {
       type: "cast",
-      value: castObject
+      value: {
+        name: castObject[0].name,
+        profile_path: castObject[0].profile_path,
+        id: castObject[0].id,
+      }  
     }
     console.log("castTypeObject:", castTypeObject);
     onAction(castTypeObject);

@@ -5,6 +5,7 @@ import GenreTags from "../movieDetailsComponents/genreTags";
 import Grid from "@mui/material/Grid";
 import SubmitText from "../forms/submitText";
 import AddGenreTags from "../forms/addGenreTags";
+import CastList from "../castList";
 
 const styles = {
   fab: { 
@@ -37,7 +38,10 @@ const FantasyMovieDetails = ({ movie, action }) => {
         <AddGenreTags onAction={action}/>
       </Grid>
       <Grid item xs={8}>
-
+        {movie.cast.length > 0 && (
+          console.log("fanCast:", movie.cast),
+          <CastList cast={movie.cast}/>
+        )}
       </Grid>
       <Grid item xs={4}>
         <AddCast onAction={action}/>

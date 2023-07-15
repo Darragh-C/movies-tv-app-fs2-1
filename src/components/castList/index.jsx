@@ -43,20 +43,7 @@ const CastList = ( { cast } ) => {
               </ListItemAvatar>
               <ListItemText
                 primary={c.name}
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {c.character}
-                      
-  
-                    </Typography>
-                  </React.Fragment>
-                } 
+                
               />
               <Link to={`/cast/${c.id}`}>
                 <Button variant="outlined" size="medium" color="primary">
