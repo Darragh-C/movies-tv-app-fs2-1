@@ -20,13 +20,13 @@ const styles = {
 const MovieDetails = ( { movie, cast }) => {
   const { id } = useParams();
 
-  console.log(`cast: ${cast}`);
+  const genreNames = movie.genres.map((genre) => genre.name);
 
   const [drawerOpen, setDrawerOpen] = useState(false); 
   return (
     <>
       <MovieBio movie={movie} />
-      <GenreTags media={movie} />
+      <GenreTags genres={genreNames} />
       <MovieMetadata movie={movie} />
       <CastList cast={cast}/>
 

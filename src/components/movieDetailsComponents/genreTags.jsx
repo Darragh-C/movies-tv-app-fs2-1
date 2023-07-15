@@ -19,40 +19,23 @@ const styles = {
   },
 };
 
-const GenreTags = ( { media }) => {
+const GenreTags = ( { genres }) => {
 
   return (
     <>
-     {media.genres[0].name ? (
-        <>
-          {media.genres && media.genres.every((g) => g.name) && (
-            <Paper component="ul" sx={styles.chipSet}>
-              <li>
-                <Chip label="Genres" sx={styles.chipLabel} color="primary" />
-              </li>
-              {media.genres.map((g) => (
-                <li key={g.name}>
-                  <Chip label={g.name} />
-                </li>
-              ))}
-            </Paper>
-          )}
-        </>
-      ) : media.genres.length > 0 && (
-        <>
-          <Paper component="ul" sx={styles.chipSet}>
-            <li>
-              <Chip label="Genres" sx={styles.chipLabel} color="primary" />
+      {genres.length > 0 && (
+        <Paper component="ul" sx={styles.chipSet}>
+          <li>
+            <Chip label="Genres" sx={styles.chipLabel} color="primary" />
+          </li>
+          {genres.map((g) => (
+            <li key={g}>
+              <Chip label={g} />
             </li>
-            {media.genres.map((g) => (
-              <li key={g}>
-                <Chip label={g} />
-              </li>
-            ))}
-          </Paper>
-      </> 
+          ))}
+        </Paper>
       )}
-    </>
+    </> 
   );
 };
 export default  GenreTags;

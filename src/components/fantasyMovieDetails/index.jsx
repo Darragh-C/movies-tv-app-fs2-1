@@ -31,7 +31,7 @@ const FantasyMovieDetails = ({ movie, action }) => {
       <SubmitText label={"overview"} onAction={action}/>
       </Grid>
       <Grid item xs={8}>
-        <GenreTags media={movie}/>
+        <GenreTags genres={movie.genres}/>
       </Grid>
       <Grid item xs={4}>
         <AddGenreTags onAction={action}/>
