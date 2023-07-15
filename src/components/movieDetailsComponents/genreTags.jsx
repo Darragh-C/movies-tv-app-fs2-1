@@ -23,7 +23,7 @@ const GenreTags = ( { media }) => {
 
   return (
     <>
-     {media.genres.name ? (
+     {media.genres[0].name ? (
         <>
           {media.genres && media.genres.every((g) => g.name) && (
             <Paper component="ul" sx={styles.chipSet}>
