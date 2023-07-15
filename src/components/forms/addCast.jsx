@@ -5,7 +5,8 @@ import { useQuery } from "react-query";
 import React from 'react';
 import Spinner from '../../components/spinner';
 
-const AddCast = ({ }) => {
+
+const AddCast = ({ onAction }) => {
 
   const { data, error, isLoading, isError } = useQuery("popular-cast", getAllPolularCastPages);
 
@@ -21,6 +22,15 @@ const AddCast = ({ }) => {
     return <h1>{error.message}</h1>;
   }
 
+  const handleCastSelection = (castName) => {
+    const castObject = data.filter((o) => o.name === castName);
+    const castTypeObject = {
+      type: "cast",
+      value: castObject
+    }
+    console.log("castTypeObject:", castTypeObject);
+    onAction(castTypeObject);
+  }
 
   return (
     <Autocomplete
@@ -28,9 +38,9 @@ const AddCast = ({ }) => {
       id="combo-box-demo"
       options={cast}
       sx={{ width: 300 }}
-      onChange={(selectedCast) => {
-        console.log("Selected Value:", selectedCast.target.innerText);
-        //addCast(selectedValue);
+      onChange={(e) => {
+        console.log("Selected Value:", e.target.innerText);
+        handleCastSelection(e.target.innerText);
       }}
       renderInput={(params) => <TextField {...params} label="Cast" />}
     />

@@ -40,7 +40,7 @@ const FantasyMovieDetails = ({ movie, action }) => {
 
       </Grid>
       <Grid item xs={4}>
-        <AddCast/>
+        <AddCast onAction={action}/>
       </Grid>
     </Grid>
   );
