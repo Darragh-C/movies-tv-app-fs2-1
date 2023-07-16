@@ -20,6 +20,7 @@ const FantasyMoviePage = () => {
     overview: "",
     genres: [],
     cast: [],
+    production_companies: [],
   });
 
   const handleUpdate = (data) => {
@@ -34,6 +35,9 @@ const FantasyMoviePage = () => {
     } else if (type === "cast") {
       console.log("handleCastUpdate", value)
       handleCastUpdate(value)
+    } else if (type === "production") {
+      console.log("handleProdUpdate", value)
+      handleProdUpdate(value)
     }
   };
 
@@ -64,6 +68,15 @@ const FantasyMoviePage = () => {
     setMovie((prevMovie) => ({
       ...prevMovie,
       cast: [...prevMovie.cast, val]
+    }));
+    console.log(`genre val: ${val}`)
+  };
+
+  const handleProdUpdate = (val) => {
+    console.log(`handleProdUpdate: ${val}`)
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      production_companies: [...prevMovie.production_companies, val]
     }));
     console.log(`genre val: ${val}`)
   };

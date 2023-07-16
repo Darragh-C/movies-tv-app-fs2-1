@@ -103,6 +103,17 @@ export const getGenres = async () => {
  });
 };
 
+export const getProduction = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/company/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      // console.log(json.results);
+      return json;
+    });
+};
+
 export const getMovieImages = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;

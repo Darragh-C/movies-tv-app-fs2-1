@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 import SubmitText from "../forms/submitText";
 import AddGenreTags from "../forms/addGenreTags";
 import CastList from "../castList";
+import AddProduction from "../forms/addProduction";
+import ProductionCompaniesRow from "../cardRows/productionCompaniesRow";
 
 const styles = {
   fab: { 
@@ -38,8 +40,15 @@ const FantasyMovieDetails = ({ movie, action }) => {
         <AddGenreTags onAction={action}/>
       </Grid>
       <Grid item xs={8}>
+        {movie.production_companies.length > 0 && (
+          <ProductionCompaniesRow companies={movie.production_companies}/>
+        )}
+      </Grid>
+      <Grid item xs={4}>
+        <AddProduction onAction={action}/>
+      </Grid>
+      <Grid item xs={8}>
         {movie.cast.length > 0 && (
-          console.log("fanCast:", movie.cast),
           <CastList cast={movie.cast}/>
         )}
       </Grid>

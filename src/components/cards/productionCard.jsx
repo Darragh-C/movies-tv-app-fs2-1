@@ -11,22 +11,19 @@ const styles = {
   card: { 
     maxWidth: 300,
     maxHeight: 200,
-    // display: 'flex',
-    // justifyContent: 'center',
-    // alignItems: 'center', 
   },
   media: { 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 1,
-    width: 40
    },
   image: {
     maxWidth: "auto",
-    maxHeight: 50,
+    maxHeight: 30,
     padding: 5,
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
