@@ -8,6 +8,7 @@ import CastList from "../castList";
 import MovieMetadata from "../movieDetailsComponents/movieMetadata";
 import MovieBio from "../movieDetailsComponents/movieBio";
 import GenreTags from "../movieDetailsComponents/genreTags";
+import ProductionCompaniesRow from "../cardRows/productionCompaniesRow";
 
 const styles = {
   fab: { 
@@ -28,6 +29,7 @@ const MovieDetails = ( { movie, cast }) => {
       <MovieBio movie={movie} />
       <GenreTags genres={genreNames} />
       <MovieMetadata movie={movie} />
+      <ProductionCompaniesRow companies={movie.production_companies}/>
       <CastList cast={cast}/>
 
       <Fab    

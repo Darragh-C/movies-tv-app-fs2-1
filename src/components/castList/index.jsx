@@ -26,12 +26,16 @@ const styles = {
   episodeNum: {
     margin: 2, 
   },
+  text: {
+    fontFamily: 'sans-serif'
+  }
 };
 
 const CastList = ( { cast } ) => {
   return (
     <>
       <br></br>
+      <h3 style={styles.text}>Cast</h3>
       <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper', alignItems: "center" }}>
         {cast.map((c, index) => (
           <React.Fragment key={index}>
