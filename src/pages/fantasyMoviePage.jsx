@@ -9,7 +9,7 @@ import MediaImageList from "../components/imageLists/mediaImageList";
 import MediaHeader from "../components/MediaHeader";
 import MediaHeaderInsert from "../components/headerInserts/MediaHeaderInsert";
 import FantasyMoviePoster from "../components/imageLists/fantasyMoviePoster";
-import FantasyMovieDetails from "../components/fantasyMovieDetails";
+import FantasyMovieDetailsTest from "../components/fantasyMovieDetailsTest";
 import FastasyMediaHeaderInsert from "../components/headerInserts/fantasyMovieHeaderInsert";
 
 const FantasyMoviePage = () => {
@@ -88,7 +88,7 @@ const FantasyMoviePage = () => {
           <FastasyMediaHeaderInsert title={movie.title}/>
         </MediaHeader>
         <FantasyMoviePoster />
-        <FantasyMovieDetails movie={movie} action={handleUpdate}/>
+        <FantasyMovieDetailsTest movie={movie} action={handleUpdate}/>
       </TemplateMediaDetailsPage>
     </>
   );
