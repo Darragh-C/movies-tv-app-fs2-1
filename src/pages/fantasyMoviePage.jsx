@@ -18,6 +18,8 @@ const FantasyMoviePage = () => {
   const [movie, setMovie] = useState({
     title: "",
     overview: "",
+    release_date: "",
+    runtime: 0,
     genres: [],
     cast: [],
     production_companies: [],
@@ -38,6 +40,12 @@ const FantasyMoviePage = () => {
     } else if (type === "production") {
       console.log("handleProdUpdate", value)
       handleProdUpdate(value)
+    } else if (type === "release date") {
+      console.log("handleReleaseUpdate", value)
+      handleReleaseUpdate(value)
+    } else if (type === "run time") {
+      console.log("handleRuntimeUpdate", value)
+      handleRuntimeUpdate(value)
     }
   };
 
@@ -52,6 +60,20 @@ const FantasyMoviePage = () => {
     setMovie((prevMovie) => ({
       ...prevMovie,
       overview: val,
+    }));
+  };
+
+  const handleReleaseUpdate = (val) => {
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      release_date: val,
+    }));
+  };
+
+  const handleRuntimeUpdate = (val) => {
+    setMovie((prevMovie) => ({
+      ...prevMovie,
+      runtime: val,
     }));
   };
 

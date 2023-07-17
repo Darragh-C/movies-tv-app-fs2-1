@@ -11,6 +11,7 @@ import ProductionCompaniesRow from "../cardRows/productionCompaniesRow";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import EditIcon from '@mui/icons-material/Edit';
+import MovieMetadata from "../movieDetailsComponents/movieMetadata";
 
 const styles = {
   fab: { 
@@ -28,6 +29,9 @@ const FantasyMovieDetailsTest = ({ movie, action }) => {
     <>
       <MovieBio movie={movie} />
       <GenreTags genres={movie.genres} />
+      {movie.release_date || movie.runtime > 0 && (
+        <MovieMetadata movie={movie} />
+      )}
       {movie.production_companies.length > 0 && (
           <ProductionCompaniesRow companies={movie.production_companies}/>
         )}
@@ -46,6 +50,8 @@ const FantasyMovieDetailsTest = ({ movie, action }) => {
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <SubmitText label={"title"} onAction={action}/>
         <SubmitText label={"overview"} onAction={action}/>
+        <SubmitText label={"release date"} onAction={action}/>
+        <SubmitText label={"run time"} onAction={action}/>
         <AddGenreTags onAction={action}/>
         <AddProduction onAction={action}/>
         <AddCast onAction={action}/>

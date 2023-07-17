@@ -21,7 +21,7 @@ const styles = {
 const MovieMetadata = ( { movie }) => { 
   return (
     <>
-      {movie ? (
+      {movie && (
         <Paper component="ul" sx={styles.chipSet}>
           {movie.runtime && (
             <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
@@ -32,17 +32,18 @@ const MovieMetadata = ( { movie }) => {
               label={`${movie.revenue.toLocaleString()}`}
             />
           )}
-          <Chip
-            icon={<StarRate />}
-            label={`${movie.vote_average} ${movie.vote_count}`}
-          />
+          {movie.vote_average && (
+            <Chip
+              icon={<StarRate />}
+              label={`${movie.vote_average}`}
+            />
+          )}
+
           {movie.release_date && (
             <Chip label={`Released: ${movie.release_date}`} />
           )}
         </Paper>
-      ) : (
-        <AddMovieMetadata/>
-      )}
+      ) }
     </>  
   );
 };
