@@ -23,7 +23,7 @@ const MovieMetadata = ( { movie }) => {
     <>
       {movie && (
         <Paper component="ul" sx={styles.chipSet}>
-          {movie.runtime && (
+          {movie.runtime > 0 && (
             <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
           )}
           {movie.revenue && (

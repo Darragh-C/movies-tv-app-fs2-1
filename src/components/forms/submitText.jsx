@@ -24,7 +24,10 @@ const styles = {
 }
 
 function SubmitText({ label, onAction }) {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    type: "",
+    value: "",
+  });
 
   const handleInputChange = (event) => {
     const {name, value} = event.target;
@@ -48,12 +51,13 @@ function SubmitText({ label, onAction }) {
   return (
     <form onSubmit={handleSubmit}>
       <br/>
-      <Grid container spacing={2}>
-        <Grid item xs={0.25}></Grid>
-        <Grid item xs={6}>
-          <label sx={styles.label}>
-            <p style={styles.text}>Add {label}:</p>
+      <Grid key={label + "-grid"} container spacing={2}>
+        <Grid key={label + "-griditem1"} item xs={0.25}></Grid>
+        <Grid key={label + "-griditem2"} item xs={6}>
+          <label key={label + "-label"} sx={styles.label}>
+            <p key={label + "-text"} style={styles.text}>Add {label}:</p>
             <input
+              key={label + "-input"}
               sx={styles.label}
               type="text"
               name={label}
@@ -62,12 +66,12 @@ function SubmitText({ label, onAction }) {
             />
           </label>
         </Grid>
-        <Grid item xs={2}>
-          <button sx={styles.button} type="submit">
+        <Grid key={label + "griditem3"} item xs={2}>
+          <button key={label + "-button"} sx={styles.button} type="submit">
             Submit
           </button>
         </Grid>
-        <Grid item xs={2}></Grid>
+        <Grid key={label + "griditem4"} item xs={2}></Grid>
       </Grid>
     </form>
   );

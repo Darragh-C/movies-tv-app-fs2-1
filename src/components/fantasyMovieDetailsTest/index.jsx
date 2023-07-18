@@ -29,7 +29,7 @@ const FantasyMovieDetailsTest = ({ movie, action }) => {
     <>
       <MovieBio movie={movie} />
       <GenreTags genres={movie.genres} />
-      {movie.release_date || movie.runtime > 0 && (
+      {(movie.release_date || movie.runtime > 0) && (
         <MovieMetadata movie={movie} />
       )}
       {movie.production_companies.length > 0 && (
